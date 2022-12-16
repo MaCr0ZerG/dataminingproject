@@ -33,9 +33,11 @@ def dbscan(vectors: list, minpts: int, epsilon: float) -> list:
                                 if l.id == -1:
                                     seeds.append(l)
                                 l.id = id
-                    seeds.remove(k)                                
-
-    return None
+                    seeds.remove(k) 
+    ids = list 
+    for i in tempvectors:
+        ids[i] = i.id                              
+    return ids
 
 def neighbours(vector = list,vectors = list, epsilon = float) -> list:
     neighbours = list
