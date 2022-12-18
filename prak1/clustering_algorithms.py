@@ -52,9 +52,13 @@ def kmeans(vectors: list, k=10) -> list:
             break
 
         clusterOldList = clusterNewList
+        clustercount = []
         # update means
-        means = [[0,0,0] , [0,0,0] , [0,0,0] , [0,0,0]]
-        clustercount = [0, 0, 0, 0] 
+        for mean in means:
+            mean = [0,0,0]
+            clustercount.append(0)
+
+
 
         for num in clusterNewList:
             means[num][0] = means[num][0] + vectors[num][0] # sum of vectors in cluster
