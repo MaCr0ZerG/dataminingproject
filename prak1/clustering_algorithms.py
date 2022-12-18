@@ -1,8 +1,6 @@
-import math
-
-
 import random
 import math
+import numpy as np
 
 def kmeans(vectors: list, k=10) -> list:
     # init
@@ -71,54 +69,54 @@ def kmeans(vectors: list, k=10) -> list:
 
 
 def dbscan(vectors: list, minpts: int, epsilon: float) -> list:
-
+    tempvectors = []
     for i in vectors:
-        tempvectors = list
-        tempvectors[i] = Vector(i,-1,neighbours(i,vectors,epsilon))
+        tempvectors.append(Vector(i,-1))#neighbours(i,vectors,epsilon)))
     id = 0
     for i in tempvectors:
         if i.id == -1:
-            if i.neighbours.len < minpts:
+            ineighbours = neighbours(i,tempvectors, epsilon)
+            if len(ineighbours) < minpts:
                  i.id = 0
             else:
                 id += 1
-                seeds = neighbours
+                seeds = ineighbours
                 for j in seeds:
                     j.id = id
                 seeds.remove(i)
-                while seeds.len != 0:
+                while len(seeds) != 0:
                     k = seeds[0]
-                    if k.neighbours >= minpts:
-                        for l in k.neighbours:
+                    kneighbours = neighbours(k,tempvectors, epsilon)
+                    if len(kneighbours) >= minpts:
+                        for l in kneighbours:
                             if l.id < 1:
                                 if l.id == -1:
                                     seeds.append(l)
                                 l.id = id
                     seeds.remove(k) 
-    ids = list 
+    ids = []
     for i in tempvectors:
-        ids[i] = i.id                              
+        ids.append(i.id)                              
     return ids
 
-def neighbours(vector = list,vectors = list, epsilon = float) -> list:
-    neighbours = list
+def neighbours(Vector,vectors = list, epsilon = float) -> list:
+    neighbours = []
     for i in vectors:
-        if distance(vector, i) <= epsilon:
+        if distance(Vector.list, i.list) <= epsilon:
             neighbours.append(i)
     return neighbours
 
-def distance(vector1: list, vector2: list ) -> float:
+def distance(vector1: np.array, vector2: np.array) -> float:
 
     # distance between two n-dimensional points.
-    distance = float
-    for i in vector1.count:
-        distance += (vector1[i] - vector2[i])^2
-    
-    distance = math.sqrt(distance)
+    distance = 0.0
+    for i in range (0,len(vector1)-1):
+        distance += (vector1[i] - vector2[i])**2
+    distance = math.sqrt(float(distance))
     return distance
 
 class Vector :
-    def __init__(self, list, id, neighbours):
+    def __init__(self, list, id):#, neighbours):
         self.list = list
         self.id = id
-        self.neighbours = neighbours
+        #self.neighbours = neighbours
