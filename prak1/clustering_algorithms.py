@@ -65,6 +65,10 @@ def kmeans(vectors: list, k=10) -> list:
             clustercount[num] = clustercount[num] + 1 # num of vectors in cluster
 
         for n in range(0, k):
+            if clustercount[n] == 0:
+                clustercount[n] = 1
+
+        for n in range(0, k):
             means[n][0] = int(means[n][0] / clustercount[n])
             means[n][1] = int(means[n][1] / clustercount[n])
             means[n][2] = int(means[n][2] / clustercount[n])
