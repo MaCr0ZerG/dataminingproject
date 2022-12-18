@@ -72,10 +72,8 @@ def kmeans(vectors: list, k=10) -> list:
 
 def dbscan(vectors: list, minpts: int, epsilon: float) -> list:
 
-    # todo: implement dbscan here!
-    clusters = list(list(Vector))
     for i in vectors:
-        tempvectors = list(Vector)
+        tempvectors = list
         tempvectors[i] = Vector(i,-1,neighbours(i,vectors,epsilon))
     id = 0
     for i in tempvectors:
